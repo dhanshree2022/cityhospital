@@ -13,9 +13,9 @@ a:hover {
   text-decoration: none;
 }
 
-h1, h2, h3, h4, h5, h6 {
+/* h1, h2, h3, h4, h5, h6 {
   font-family: "Raleway", sans-serif;
-}
+} */
 
 /*--------------------------------------------------------------
 # Preloader
@@ -461,20 +461,20 @@ h1, h2, h3, h4, h5, h6 {
   position: relative;
 }
 
-#hero h1 {
+/* #hero h1 {
   margin: 0;
   font-size: 48px;
   font-weight: 700;
   line-height: 56px;
   text-transform: uppercase;
   color: #2c4964;
-}
+} */
 
-#hero h2 {
+/* #hero h2 {
   color: #2c4964;
   margin: 10px 0 0 0;
   font-size: 24px;
-}
+} */
 
 #hero .btn-get-started {
   font-family: "Raleway", sans-serif;
@@ -509,10 +509,10 @@ h1, h2, h3, h4, h5, h6 {
   #hero .container {
     padding-bottom: 63px;
   }
-  #hero h1 {
+  /* #hero h1 {
     font-size: 28px;
     line-height: 36px;
-  }
+  } */
   #hero h2 {
     font-size: 18px;
     line-height: 24px;
@@ -1062,7 +1062,7 @@ section {
   margin-top:40px ;
 }
 
-.appointment .php-email-form input, .appointment .php-email-form textarea, .appointment .php-email-form select {
+/* .appointment .php-email-form input, .appointment .php-email-form textarea, .appointment .php-email-form select {
   border-radius: 0;
   box-shadow: none;
   font-size: 14px;
@@ -1075,24 +1075,24 @@ section {
 
 .appointment .php-email-form input, .appointment .php-email-form select {
   height: 44px;
-}
+} */
 
 .appointment .php-email-form textarea {
   padding: 10px 12px;
 }
 
-.appointment .php-email-form button[type="submit"] {
+/* .appointment .php-email-form button[type="submit"] {
   background: #FF6337;
   border: 0;
   padding: 10px 35px;
   color: #fff;
   transition: 0.4s;
   border-radius: 50px;
-}
+} */
 
-.appointment .php-email-form button[type="submit"]:hover {
+/* .appointment .php-email-form button[type="submit"]:hover {
   background: #1c84e3;
-}
+} */
 
 /*--------------------------------------------------------------
 # Departments
@@ -1752,3 +1752,18 @@ section {
 .main-header {
   height: 138px;
 }
+
+/* .mySwiper{
+  border: 2px solid black;
+   height: 250px;
+   max-width: 500px;
+} */
+/* .mySwiper.swiper-button-prev:after, .swiper-button-next:after {
+  font-size: 22px;
+  color: #111;
+}
+
+.mySwiper.swiper-button-prev, .swiper-button-prev:after {
+  font-size: 22px;
+  color: #494646;
+} */

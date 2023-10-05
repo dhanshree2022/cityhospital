@@ -1,15 +1,20 @@
-import logo from './logo.svg';
 import './App.css';
-import Header from './components/Header/Header';
-import Footer from './components/Footer/Footer';
+import { Route, Routes } from 'react-router';
+import UserRoute from './routes/UserRoute';
+import AdminRoute from './routes/AdminRoute';
+import PrivateRoute from './routes/PrivateRoute';
 
 function App() {
   return (
-      <>
-        <Header/>
-        <Footer/>
-      </>
-    );
+    <>
+      <Routes>
+        <Route path='/*' element={<UserRoute />} />
+        
+        <Route path='/admin/*' element={<AdminRoute />} />
+
+      </Routes>
+    </>
+  );
 }
 
 export default App;

@@ -1,87 +1,194 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Card from '../../components/UI/Card/Card';
 
-function Medicines(props) {
-    const Medicines = [
-        {
-            "id": 1,
-            "name": "Naproxen",
-            "price": 85,
-            "expiry": 2023,
-            "desc": "Naproxen, sold under the brand name Aleve among others, is a nonsteroidal anti-inflammatory drug used to treat pain, menstrual cramps, inflammatory diseases such as rheumatoid arthritis, gout and fever."
-        },
-        {
-            "id": 2,
-            "name": "Jakafi",
-            "price": 85,
-            "expiry": 2023,
-            "desc": "Ruxolitinib, sold under the brand name Jakafi among others, is a medication used for the treatment of intermediate or high-risk myelofibrosis, a type of myeloproliferative neoplasm that affects the bone."
-        },
-        {
-            "id": 3,
-            "name": "Hydrea",
-            "price": 85,
-            "expiry": 2023,
-            "desc": "Hydrea (hydroxyurea) is an antineoplastic (anti-cancer) agent used to treat melanoma, resistant chronic myelocytic leukemia, and recurrent, metastatic, or inoperable carcinoma of the ovary and primary squamous cell (epidermoid) carcinomas of the head and neck."
-        },
-        {
-            "id": 4,
-            "name": "Hiprex",
-            "price": 85,
-            "expiry": 2023,
-            "desc": "Hexamethylenetetramine, also known as methenamine, hexamine, or urotropin, is a heterocyclic organic compound with the formula (CH₂)₆N₄. This white crystalline compound is highly soluble in water and polar organic solvents. It has a cage-like structure similar to adamantane"
-        },
-        {
-            "id": 5,
-            "name": "Meftal",
-            "price": 85,
-            "expiry": 2023,
-            "desc": "Meftal Spas tablet is an antispasmodic medicine. It contains a combination of dicyclomine and mefenamic acid. This medicine is used for relieving pain and spasm in the abdomen and during or before menses (periods)."
-        },
-        {
-            "id": 6,
-            "name": "Wegovy",
-            "price": 85,
-            "expiry": 2023,
-            "desc": "WEGOVY® (semaglutide) injection 2.4 mg is an injectable prescription medicine that may help adults and children aged ≥12 years with obesity (BMI ≥30 for adults, BMI ≥ 95th percentile for age and sex for children), or some adults with excess weight (BMI ≥27) (overweight) who also have weight-related medical problems to help them lose weight and keep it off. Wegovy® should be used with a reduced calorie meal plan and increased physical activity"
-        },
-        {
-            "id": 7,
-            "name": "Aripiprazole",
-            "price": 85,
-            "expiry": 2023,
-            "desc": "Aripiprazole is used to treat certain mental/mood disorders (such as bipolar disorder, schizophrenia, Tourette's syndrome, and irritability associated with autistic disorder). It may also be used in combination with other medication to treat depression. Aripiprazole is known as an antipsychotic drug (atypical type)."
-        },
-        {
-            "id": 8,
-            "name": "Orlistat",
-            "price": 85,
-            "expiry": 2023,
-            "desc": "Orlistat, sold under the brand name Xenical among others, is a medication used to treat obesity. Its primary function is preventing the absorption of fats from the human diet by acting as a lipase inhibitor, thereby reducing caloric intake."
+function Medicines({ incrementCount, fav, setFav }) {
+
+    const [search, setSearch] = useState('');
+    const [sort, setSort] = useState('');
+    const [category, setCategory] = useState([]);
+    const [selectCat, setSelectCat] = useState('');
+
+    // const [favoriteCount, setFavoriteCount] = useState(0);
+
+    // const addToFavorites = (id) => {
+    //     console.log(id, "add");
+    //     if (!favorites.includes(id)) {
+
+    //         setFavorites([...favorites, id]);
+    //         // setFavorites(favorites.length + 1); // Update favoriteCount
+
+    //         // setFavoriteCount(favorites.length + 1);
+
+    //     }
+    // };
+
+    // const removeFromFavorites = (id) => {
+    //     console.log(id, "remove");
+    //     const updatedFavorites = favorites.filter((favoriteId) => favoriteId !== id);
+    //     setFavorites(updatedFavorites);
+    //     // setFavorites(favorites.length - 1); // Update favoriteCount
+
+    //     // setFavoriteCount(favorites.length - 1);
+
+    // };
+
+    const handleAddToCart = () => {
+        console.log("cghg");
+
+        incrementCount((prev) => prev + 1);
+    }
+
+    const handleFav = (id) => {
+        console.log(id);
+        if (fav.includes(id)) {
+            let fData = fav.filter((v) => v !== id);
+            setFav(fData);
+        } else {
+            setFav((prev) => [...prev, id]);
+
+        }
+
+    }
+    console.log(fav);
+
+    let localData = JSON.parse(localStorage.getItem("medicines"));
+    // console.log(localData);
 
 
-        }];
+    // const handleSearch = (val) => {
+    //     setSearch(val)
+    //     const medfilterData = localData.filter((v) =>
+    //         (v.name.toLowerCase().includes(val.toLowerCase())) ||
+    //         (v.desc.toLowerCase().includes(val.toLowerCase())) ||
+    //         (v.price.toLowerCase().includes(val.toLowerCase()))
 
-    console.log(Medicines)
+    //     )
+
+    //     setFilterData(medfilterData);
+    //     console.log(medfilterData);
+    // }
+
+
+    const handleSearchSort = () => {
+        // console.log('ok', localData);
+
+        let fData = localData.filter((v) =>
+            (v.name.toLowerCase().includes(search.toLowerCase())) ||
+            (v.price.toLowerCase().includes(search.toLowerCase())
+            ));
+
+        if (selectCat !== '') {
+            fData = localData.filter((d) => d.category === selectCat);
+        }
+
+        // console.log(fData);
+
+        fData = fData.sort((a, b) => {
+            if (sort === 'lh') {
+                return a.price - b.price
+            } else if (sort === 'hl') {
+                return b.price - a.price
+            } else if (sort === 'az') {
+                return a.title.localCompare(b.title)
+            } else if (sort === 'za') {
+                return b.title.localCompare(a.title)
+
+            }
+        })
+        return fData
+    }
+
+    const finalData = handleSearchSort();
+
+    const cardcontainer = {
+        padding: '16px'
+    };
+
+    const card = {
+        width: '300px',
+        border: '1px solid #ccc',
+        borderradius: '8px',
+        boxshadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
+        margin: '20px',
+        overflow: 'hidden',
+        backgroundcolor: '#fff'
+    }
+    // const finalData = filterData.length > 0 ? filterData : localData;
+
     return (
-        <>
+        <div className='container'>
+            <div className='row'>
+                <input type='text' placeholder='Search here....' onChange={(event) => setSearch(event.target.value)} />
+
+                <select onChange={(event) => setSort(event.target.value)}>
+                    <option value="0">---Select---</option>
+                    <option value="lh">Price (Low to High)</option>
+                    <option value="hl">Price (High to Low)</option>
+                    <option value="az">Title (A-Z)</option>
+                    <option value="za">Title (Z-A)</option>
+
+                </select>
+
+                <div>
+                    {
+                        category.map((c) => {
+                            return (
+                                <button onClick={() => setSelectCat(c)}>{c}</button>
+                            )
+                        })
+                    }
+                </div>
+            </div>
+
+
+            {/* <div style={{ display: 'flex', flexWrap: 'wrap' }}> */}
             {
-                Medicines.map((v, i) => {
+                finalData.map((v, i) => {
                     return (
-                        <Link to={'/medicines-details/' + v.id}>
-                            <div>
-                            <Card
-                                title={v.name}
-                                subtitle={v.price}
-                            />
+
+                        <div className='col-md-4'>
+                            <div >
+                                {/* <Link to={'/medicines-details/' + v.id}> */}
+                                <Card
+                                    title={v.name}
+                                    subtitle={v.price}
+                                    btnValue='Add To Cart'
+                                    btnClick={handleAddToCart}
+                                    favClick={() => handleFav(v.id)}
+                                    favStatus={(fav.includes(v.id)) ? true : false}
+
+                                />
                             </div>
-                        </Link>
+                            {/* </Link> */}
+
+                        </div>
+
+
                     )
                 })
             }
 
-        </>
+
+            {/* </div> */}
+
+
+            {/* <div>
+                <h2>Medicines Cart</h2>
+                <ul>
+                    {cartItems.map((item, index) => (
+                        <li key={index}>
+                            {item.name} - ${item.price} - Quantity: {item.quantity}
+                            <button onClick={() => increaseQuantity(item)}>+</button>
+                            <button onClick={() => decreaseQuantity(item)}>-</button>
+                        </li>
+                    ))}
+                </ul>
+
+            </div> */}
+        </div>
+
+
 
     );
 }

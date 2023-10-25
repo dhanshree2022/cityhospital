@@ -18,6 +18,9 @@ import Medicines from '../containers/Medicines/Medicines';
 import MedicinesDetails from '../containers/Medicines/MedicinesDetails';
 import ProductForm from '../containers/ProductForm/ProductForm';
 import Counter from '../containers/Counter/Counter';
+import Cart from '../containers/Cart/Cart';
+import ShoppingCart from '../containers/ShoppingCart/ShoppingCart';
+import Wishlist from '../containers/Wishlist/Wishlist';
 
 
 function UserRoute(props) {
@@ -45,6 +48,11 @@ function UserRoute(props) {
                     <Route exact path='/medicines-details/:id' element={<MedicinesDetails/>}/>
                     <Route exact path='/productform' element={<ProductForm/>}/>
                     <Route exact path='/counter' element={<Counter/>}/>
+                    <Route exact path='/cart' element={<Cart/>}/>
+                    <Route exact path='/shoppingcart' element={<ShoppingCart/>}/>
+                    <Route exact path='/wishlist' element={<Wishlist/>}/>
+
+
                 </Routes>
             <Footer />
         </>

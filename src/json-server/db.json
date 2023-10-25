@@ -1,0 +1,78 @@
+{
+  "medicines": [
+    {
+      "id": 1,
+      "name": "Naproxen",
+      "price": 85,
+      "expiry": 2023,
+      "desc": "Naproxen, sold under the brand name Aleve among others, is a nonsteroidal anti-inflammatory drug used to treat pain, menstrual cramps, inflammatory diseases such as rheumatoid arthritis, gout and fever."
+    },
+    {
+      "id": 5,
+      "name": "Meftal",
+      "price": 85,
+      "expiry": 2023,
+      "desc": "Meftal Spas tablet is an antispasmodic medicine. It contains a combination of dicyclomine and mefenamic acid. This medicine is used for relieving pain and spasm in the abdomen and during or before menses (periods)."
+    },
+    {
+      "id": 7,
+      "name": "Aripiprazole",
+      "price": 85,
+      "expiry": 2023,
+      "desc": "Aripiprazole is used to treat certain mental/mood disorders (such as bipolar disorder, schizophrenia, Tourette's syndrome, and irritability associated with autistic disorder). It may also be used in combination with other medication to treat depression. Aripiprazole is known as an antipsychotic drug (atypical type)."
+    },
+    {
+      "name": "abcdef",
+      "desc": "bxsbxn hjbcnzxbv hcbznx",
+      "expiry": "2023-10-31",
+      "price": "55",
+      "id": 8
+    },
+    {
+      "name": "savvbx",
+      "desc": "bvsxbxn cbxb bhjxcbxc",
+      "expiry": "2023-10-31",
+      "price": "600",
+      "id": 9
+    },
+    {
+      "name": "combiflame",
+      "desc": "gcv czvxc vc ccgc c gc dvdcvdvc cbcdsvc",
+      "expiry": "2023-10-31",
+      "price": "10",
+      "id": 10
+    }
+  ],
+  "departments": [
+    {
+      "id": 1,
+      "name": "E.N.T",
+      "short_desc": "Vestibulum volutpat luctus quam sed finibus. Sed luctus odio eget ex posuere hendrerit. Donec iaculis nisi ut purus dapibus",
+      "long_desc": "Vivamus nisi mauris, blandit quis sem sit amet, posuere blandit diam. Cras quis quam suscipit, tincidunt neque non, ullamcorper erat. Quisque sapien ipsum, efficitur ac dui et, fringilla viverra tellus. Proin urna augue, posuere ut pellentesque quis, cursus ac neque."
+    },
+    {
+      "id": 2,
+      "name": "Cancer",
+      "short_desc": "Quisque sapien ipsum, efficitur ac dui et, fringilla viverra tellus. Proin urna augue, posuere ut pellentesque quis, cursus ac neque.",
+      "long_desc": "Vivamus nisi mauris, blandit quis sem sit amet, posuere blandit diam. Cras quis quam suscipit, tincidunt neque non, ullamcorper erat. Quisque sapien ipsum, efficitur ac dui et, fringilla viverra tellus. Proin urna augue, posuere ut pellentesque quis, cursus ac neque."
+    },
+    {
+      "id": 3,
+      "name": "Physiotherapy",
+      "short_desc": "Fusce placerat ornare enim sed varius. Mauris tortor diam, molestie eget vulputate a, facilisis quis nibh. Donec blandit efficitur nulla",
+      "long_desc": "Vivamus nisi mauris, blandit quis sem sit amet, posuere blandit diam. Cras quis quam suscipit, tincidunt neque non, ullamcorper erat. Quisque sapien ipsum, efficitur ac dui et, fringilla viverra tellus. Proin urna augue, posuere ut pellentesque quis, cursus ac neque."
+    },
+    {
+      "id": 4,
+      "name": "Dental",
+      "short_desc": "sollicitudin sed est. Vestibulum volutpat luctus quam sed finibus. Sed luctus odio eget ex posuere hendrerit. Donec iaculis nisi ut purus.",
+      "long_desc": "Vivamus nisi mauris, blandit quis sem sit amet, posuere blandit diam. Cras quis quam suscipit, tincidunt neque non, ullamcorper erat. Quisque sapien ipsum, efficitur ac dui et, fringilla viverra tellus. Proin urna augue, posuere ut pellentesque quis, cursus ac neque."
+    },
+    {
+      "id": 5,
+      "name": "Neurosurgery",
+      "short_desc": "Aliquam sed convallis libero. Proin in mi tempor, convallis lectus sed, convallis mauris. Quisque ac nulla et lorem ultricies vulputate.",
+      "long_desc": "Vivamus nisi mauris, blandit quis sem sit amet, posuere blandit diam. Cras quis quam suscipit, tincidunt neque non, ullamcorper erat. Quisque sapien ipsum, efficitur ac dui et, fringilla viverra tellus. Proin urna augue, posuere ut pellentesque quis, cursus ac neque."
+    }
+  ]
+}

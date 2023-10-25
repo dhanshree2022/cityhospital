@@ -18,10 +18,13 @@ import ListItemText from '@mui/material/ListItemText';
 import MedicationIcon from '@mui/icons-material/Medication';
 import { Link } from 'react-router-dom';
 import LocalHospitalIcon from '@mui/icons-material/LocalHospital';
+import ListIcon from '@mui/icons-material/List';
 
 const listItems = [
   { label: 'Medicines', icon: <MedicationIcon />, to: '/admin/medicines' },
-  { label: 'Doctors', icon: <LocalHospitalIcon />, to: '/admin/doctors' }
+  { label: 'Doctors', icon: <LocalHospitalIcon />, to: '/admin/doctors' },
+  { label: 'Departments', icon: <ListIcon />, to: '/admin/departments' }
+
 
 ];
 
@@ -145,14 +148,7 @@ export default function Layout({ children }) {
                   px: 2.5,
                 }}  
               >
-                <MedicationIcon
-                  sx={{
-                    minWidth: 0,
-                    mr: open ? 3 : 'auto',
-                    justifyContent: 'center',
-                  }}
-                >
-                </MedicationIcon>
+                {v.icon}
                 {/* <LocalHospitalIcon
                   sx={{
                     minWidth: 0,

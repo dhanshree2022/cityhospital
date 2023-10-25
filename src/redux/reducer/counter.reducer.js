@@ -4,7 +4,7 @@ const initialState = {
     count: 0
 }
 export const CountReducer = (state=initialState,action) => {
-      console.log(action);
+    //   console.log(action);
 
       switch(action.type){
         case  INCREMENT_COUNTER:

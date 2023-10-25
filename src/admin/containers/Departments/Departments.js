@@ -2,27 +2,24 @@ import React, { useEffect, useState } from 'react';
 import { DataGrid } from '@mui/x-data-grid';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
-import MedicensForm from './MedicensForm';
-import { GET_MEDICINES } from '../../../redux/Action.types';
+import DepartmentsForm from './DepartmentsForm';
 import { useDispatch, useSelector } from 'react-redux';
-import { addMedicines, deleteMedicines, getMedicines, updateMedicines } from '../../../redux/action/medicines.action';
+import { addDepartments, deleteDepartments, getDepartments, updateDepartments } from '../../../redux/action/departments.action';
 
-function Medicens() {
+function Departments(props) {
     const [update, setUpdate] = useState(false);
     const dispatch = useDispatch();
-    const medicines = useSelector(state=>state.medicines);
-    
-
+    const departments = useSelector(state=>state.departments);
 
     useEffect(() => {
-        dispatch(getMedicines());   
+        dispatch(getDepartments())
     }, [])
 
     const handleFormSubmit = (data) => {
         if(update){
-            dispatch(updateMedicines(data))
+            dispatch(updateDepartments(data))
         } else {
-            dispatch(addMedicines(data))
+            dispatch(addDepartments(data))
         }
 
         setUpdate(false);
@@ -34,16 +31,14 @@ function Medicens() {
 
 
     const handleDelete = (id) => {
-        
-       dispatch(deleteMedicines(id));
+        dispatch(deleteDepartments(id));
     };
 
 
     const columns = [
         { field: 'name', headerName: 'Name', width: 130 },
-        { field: 'desc', headerName: 'Description', width: 130 },
-        { field: 'expiry', headerName: 'Expiry', width: 130 },
-        { field: 'price', headerName: 'Price', width: 130 },
+        { field: 'short_desc', headerName: 'Short Description', width: 130 },
+        { field: 'long_desc', headerName: 'Long Description', width: 130 },
         {
             field: 'actions', headerName: 'Actions', width: 130,
             renderCell: (params) => (
@@ -68,13 +63,14 @@ function Medicens() {
         },
     ];
 
+
     return (
         <div>
-            <MedicensForm onhandlesubmit={handleFormSubmit} updateData={update}/>
+            <DepartmentsForm onhandlesubmit={handleFormSubmit} updateData={update}/>
 
             <div style={{ height: 400, width: '100%' }}>
                 <DataGrid
-                    rows={medicines.medicines}
+                    rows={departments.departments}
                     columns={columns}
                     initialState={{
                         pagination: {
@@ -89,4 +85,4 @@ function Medicens() {
     );
 }
 
-export default Medicens;
+export default Departments;

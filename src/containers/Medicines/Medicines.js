@@ -1,88 +1,106 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Card from '../../components/UI/Card/Card';
+import { useDispatch, useSelector } from 'react-redux';
+import { getMedicines, loadingMedicines } from '../../redux/action/medicines.action';
+import CircularProgress from '@mui/material/CircularProgress';
+import { addToCart } from '../../redux/action/cart.action';
+import { addShoppingCart } from '../../redux/action/shopping.action';
 
-function Medicines({ incrementCount, fav, setFav }) {
+function Medicines({ incrementCount, fav,setFav }) {
 
     const [search, setSearch] = useState('');
     const [sort, setSort] = useState('');
     const [category, setCategory] = useState([]);
     const [selectCat, setSelectCat] = useState('');
+    const [favorites, setFavorites] = useState([]);
+    const [favoriteClickCount, setFavoriteClickCount] = useState(0);
 
-    // const [favoriteCount, setFavoriteCount] = useState(0);
+    const dispatch = useDispatch();
+    const medicines = useSelector(state => state.medicines,);
+    console.log(medicines.medicines);
+    // const cart = useSelector(state => state.cart);
+    // console.log(cart);
 
-    // const addToFavorites = (id) => {
-    //     console.log(id, "add");
-    //     if (!favorites.includes(id)) {
+    const shoppingcart = useSelector(state => state.shoppingcart);
+    console.log("shoppingcart",shoppingcart);
+    useEffect(() => {
+        dispatch(getMedicines());
+    }, [])
 
-    //         setFavorites([...favorites, id]);
-    //         // setFavorites(favorites.length + 1); // Update favoriteCount
-
-    //         // setFavoriteCount(favorites.length + 1);
-
-    //     }
-    // };
-
-    // const removeFromFavorites = (id) => {
-    //     console.log(id, "remove");
-    //     const updatedFavorites = favorites.filter((favoriteId) => favoriteId !== id);
-    //     setFavorites(updatedFavorites);
-    //     // setFavorites(favorites.length - 1); // Update favoriteCount
-
-    //     // setFavoriteCount(favorites.length - 1);
-
-    // };
-
-    const handleAddToCart = () => {
-        console.log("cghg");
-
-        incrementCount((prev) => prev + 1);
+    const handleAddToCart = (id) => {
+        // console.log(id);
+        // dispatch(addToCart(id))
+        dispatch(addShoppingCart(id))
     }
-
-    const handleFav = (id) => {
-        console.log(id);
-        if (fav.includes(id)) {
-            let fData = fav.filter((v) => v !== id);
-            setFav(fData);
-        } else {
-            setFav((prev) => [...prev, id]);
+    const addToFavorites = (id) => {
+        if (!favorites.includes(id)) {
+            setFavorites([...favorites, id]);
+            setFavoriteClickCount(favoriteClickCount + 1);
 
         }
+    };
 
-    }
-    console.log(fav);
+    
+    
+    const removeFromFavorites = (id) => {
+        const newFavorites = favorites.filter(favId => favId !== id);
+        setFavorites(newFavorites);
+    };
+    // const handleFav = (id) => {
+    //     if (fav.includes(id)) {
+    //         let fData = fav.filter((v) => v !== id);
+    //         setFav(fData);
+    //     } else {
+    //         setFav((prev) => [...prev, id]);
+    //     }
+    // }
 
-    let localData = JSON.parse(localStorage.getItem("medicines"));
+    // const handleFav = (id) => {
+    //     console.log(id);
+    //     if (fav.includes(id)) {
+    //         let fData = fav.filter((v) => v !== id);
+    //         setFav(fData);
+    //     } else {
+    //         setFav((prev) => [...prev, id]);
+
+    //     }
+
+    // }
+    // console.log(fav);
+
+    // let localData = JSON.parse(localStorage.getItem("medicines"));
     // console.log(localData);
 
 
-    // const handleSearch = (val) => {
-    //     setSearch(val)
-    //     const medfilterData = localData.filter((v) =>
-    //         (v.name.toLowerCase().includes(val.toLowerCase())) ||
-    //         (v.desc.toLowerCase().includes(val.toLowerCase())) ||
-    //         (v.price.toLowerCase().includes(val.toLowerCase()))
-
-    //     )
-
-    //     setFilterData(medfilterData);
-    //     console.log(medfilterData);
-    // }
-
-
+    
     const handleSearchSort = () => {
-        // console.log('ok', localData);
-
-        let fData = localData.filter((v) =>
+        
+        let fData = medicines.medicines.filter((v) =>
             (v.name.toLowerCase().includes(search.toLowerCase())) ||
             (v.price.toLowerCase().includes(search.toLowerCase())
             ));
 
         if (selectCat !== '') {
-            fData = localData.filter((d) => d.category === selectCat);
+            fData = medicines.medicines.filter((d) => d.category === selectCat);
         }
 
-        // console.log(fData);
+        console.log(fData);
+
+        fData = fData.sort((a, b) => {
+            if (sort === 'lh') {
+                return a.price - b.price;
+            } else if (sort === 'hl') {
+                return b.price - a.price;
+            } else if (sort === 'az') {
+                return a.title.localeCompare(b.title);
+            } else if (sort === 'za') {
+                return b.title.localeCompare(a.title);
+            } else {
+                return 0; // Handle other cases or return a default value
+            }
+        });
+        
 
         fData = fData.sort((a, b) => {
             if (sort === 'lh') {
@@ -118,19 +136,24 @@ function Medicines({ incrementCount, fav, setFav }) {
 
     return (
         <div className='container'>
+            <br></br>            <br></br>
+            <br></br>
             <div className='row'>
-                <input type='text' placeholder='Search here....' onChange={(event) => setSearch(event.target.value)} />
-
-                <select onChange={(event) => setSort(event.target.value)}>
-                    <option value="0">---Select---</option>
-                    <option value="lh">Price (Low to High)</option>
-                    <option value="hl">Price (High to Low)</option>
-                    <option value="az">Title (A-Z)</option>
-                    <option value="za">Title (Z-A)</option>
-
-                </select>
-
-                <div>
+                <div className='col-md-6'>
+                    <input type='text' placeholder='Search here....' onChange={(event) => setSearch(event.target.value)} />
+                </div>
+                <div className='col-md-6'>
+                    <select onChange={(event) => setSort(event.target.value)}>
+                        <option value="0">---Select---</option>
+                        <option value="lh">Price (Low to High)</option>
+                        <option value="hl">Price (High to Low)</option>
+                        <option value="az">Title (A-Z)</option>
+                        <option value="za">Title (Z-A)</option>
+                    </select>
+                </div>
+            </div>
+            <div className='row'>
+                <div className='col-md-12'>
                     {
                         category.map((c) => {
                             return (
@@ -140,55 +163,43 @@ function Medicines({ incrementCount, fav, setFav }) {
                     }
                 </div>
             </div>
-
-
-            {/* <div style={{ display: 'flex', flexWrap: 'wrap' }}> */}
-            {
-                finalData.map((v, i) => {
-                    return (
-
-                        <div className='col-md-4'>
-                            <div >
+            <div className='row'>
+                {medicines.isLoading ? (
+                    <div className='col-md-12' style={{ alignItems: 'center' }}>
+                        <CircularProgress />
+                    </div>
+                ) : medicines.error ? (
+                    <div className='col-md-12' style={{ color: 'red', alignItems: 'center' }}>
+                        {medicines.error}
+                    </div>
+                ) : (
+                    medicines.medicines.map((v, i) => (
+                        <div className='col-md-4' key={v.id}>
+                            <div style={{ display: 'flex', flexWrap: 'wrap' }}>
                                 {/* <Link to={'/medicines-details/' + v.id}> */}
                                 <Card
                                     title={v.name}
                                     subtitle={v.price}
                                     btnValue='Add To Cart'
-                                    btnClick={handleAddToCart}
-                                    favClick={() => handleFav(v.id)}
-                                    favStatus={(fav.includes(v.id)) ? true : false}
-
+                                    btnClick={() => handleAddToCart(v.id)}
+                                    favClick={() => {
+                                        if (favorites.includes(v.id)) {
+                                            removeFromFavorites(v.id);
+                                        } else {
+                                            addToFavorites(v.id);
+                                        }
+                                    }}
+                                    favStatus={favorites.includes(v.id)}
+                                    // favClick={() => handleFav(v.id)}
+                                    // favStatus={(fav.includes(v.id)) ? true : false}
                                 />
+                                {/* </Link> */}
                             </div>
-                            {/* </Link> */}
-
                         </div>
-
-
-                    )
-                })
-            }
-
-
-            {/* </div> */}
-
-
-            {/* <div>
-                <h2>Medicines Cart</h2>
-                <ul>
-                    {cartItems.map((item, index) => (
-                        <li key={index}>
-                            {item.name} - ${item.price} - Quantity: {item.quantity}
-                            <button onClick={() => increaseQuantity(item)}>+</button>
-                            <button onClick={() => decreaseQuantity(item)}>-</button>
-                        </li>
-                    ))}
-                </ul>
-
-            </div> */}
+                    ))
+                )}
+            </div>
         </div>
-
-
 
     );
 }

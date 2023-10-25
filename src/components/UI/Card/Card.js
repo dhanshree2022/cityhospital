@@ -15,6 +15,10 @@ function Card({ id, img = '', title = '', subtitle = '', btnValue = '', btnClick
                     {
                         favStatus ? <FavoriteIcon /> : <FavoriteBorderIcon color="action" />
 
+                //         favorites={favorites}
+                // addToFavorites={addToFavorites}
+                // removeFromFavorites={removeFromFavorites}
+
                     }
                 </Badge>
             </IconButton>

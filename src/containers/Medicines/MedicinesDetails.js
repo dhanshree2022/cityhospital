@@ -1,12 +1,17 @@
 import React, { useEffect } from 'react';
 import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router';
 
 function MedicinesDetails(props) {
     const [data, setData] = useState([]);
     const { id } = useParams();
+    const dispatch = useDispatch();
+    const medicines = useSelector(state=>state.medicines);
+console.log(medicines);
+
     let localData = JSON.parse(localStorage.getItem("medicines"));
-    const getMedicens = async () =>{
+    const getMedicens = async () => {
         const fData = localData.filter((v,i)=>v.id == id)
         console.log(fData);
 

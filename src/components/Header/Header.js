@@ -1,12 +1,22 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import Badge from '@mui/material/Badge';
 import { styled } from '@mui/material/styles';
 import IconButton from '@mui/material/IconButton';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import { useSelector } from 'react-redux';
 
-function Header({countCart,fav}) {
+function Header({ countCart, fav }) {
+    // const cart = useSelector(state => state.cart);
+    // const cartData = cart.cart.reduce((acc,v) => acc + v.qty, 0);
+    // console.log(cartData);
+
+    const shoppingcart = useSelector(state => state.shoppingcart);
+    const shopping = shoppingcart.shoppingcart.reduce((acc, v) => acc + v.qty, 0);
+    console.log(shopping);
+
+
     const StyledBadge = styled(Badge)(({ theme }) => ({
         '& .MuiBadge-badge': {
             right: -3,
@@ -24,16 +34,25 @@ function Header({countCart,fav}) {
                         <i className="bi bi-phone" /> +91 9988776655
                     </div>
                     <div className="d-none d-lg-flex social-links align-items-center">
-                        <IconButton aria-label="cart">
-                            <StyledBadge badgeContent={countCart} color="secondary">
-                                <ShoppingCartIcon />
-                            </StyledBadge>
-                        </IconButton>
-                        <IconButton aria-label="cart">
-                            <StyledBadge badgeContent={fav.length} color="secondary">
-                                <FavoriteBorderIcon />
-                            </StyledBadge>
-                        </IconButton>
+                        {/* <Link to={'/cart'}> */}
+                        <Link to={'/shoppingcart'}>
+                            <IconButton aria-label="cart" >
+                                {/* <StyledBadge badgeContent={cartData} color="secondary" > */}
+                                <StyledBadge badgeContent={shopping} color="secondary" >
+
+                                    <ShoppingCartIcon />
+                                </StyledBadge>
+                            </IconButton>
+                        </Link>
+
+                        <Link to={'/wishlist'}>
+
+                            <IconButton aria-label="cart">
+                                <StyledBadge badgeContent={fav.length} color="secondary">
+                                    <FavoriteBorderIcon />
+                                </StyledBadge>
+                            </IconButton>
+                        </Link>
 
                         <a href="#" className="twitter"><i className="bi bi-twitter" /></a>
                         <a href="#" className="facebook"><i className="bi bi-facebook" /></a>
@@ -122,6 +141,7 @@ function Header({countCart,fav}) {
                     </NavLink>
                 </div>
             </header>
+
         </div>
 
 

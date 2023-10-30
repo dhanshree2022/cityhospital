@@ -3,39 +3,49 @@ import { DataGrid } from '@mui/x-data-grid';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import DoctorsForm from './DoctorsForm';
+import { useDispatch, useSelector } from 'react-redux';
+import { addDoctor, deleteDoctor, getDoctor, updateDoctor } from '../../../redux/action/doctor.action';
 
 function Doctors(props) {
-    const [mData, setDocData] = useState([]);
     const [update, setUpdate] = useState(false);
+    const dispatch = useDispatch();
+    const doctor = useSelector(state=>state.doctor)
 
     useEffect(() => {
-        let localData = JSON.parse(localStorage.getItem("doctors"));
-        if (localData) {
-            setDocData(localData);
-        }
+        dispatch(getDoctor());
+        // let localData = JSON.parse(localStorage.getItem("doctors"));
+        // if (localData) {
+        //     setDocData(localData);
+        // }
     }, [])
 
     const handleFormSubmit = (data) => {
-        let localData = JSON.parse(localStorage.getItem("doctors"));
-        let id = Math.floor(Math.random() * 1000);
-
-        if (localData) {
-            if (update) {
-                let index = localData.findIndex((v) => v.id == data.id);
-
-                localData[index] = data;
-                localStorage.setItem('doctors', JSON.stringify(localData));
-                setDocData(localData);
-                setUpdate(false);
-            } else {
-                localData.push({ id: id, ...data });
-                localStorage.setItem("doctors", JSON.stringify(localData));
-                setDocData(localData)
-            }
+        if(update){
+            dispatch(updateDoctor(data))
         } else {
-            localStorage.setItem("doctors", JSON.stringify([{ id, ...data }]));
-            setDocData([{ id, ...data }])
+            dispatch(addDoctor(data))
         }
+        setUpdate(false);
+        // let localData = JSON.parse(localStorage.getItem("doctors"));
+        // let id = Math.floor(Math.random() * 1000);
+
+        // if (localData) {
+        //     if (update) {
+        //         let index = localData.findIndex((v) => v.id == data.id);
+
+        //         localData[index] = data;
+        //         localStorage.setItem('doctors', JSON.stringify(localData));
+        //         setDocData(localData);
+        //         setUpdate(false);
+        //     } else {
+        //         localData.push({ id: id, ...data });
+        //         localStorage.setItem("doctors", JSON.stringify(localData));
+        //         setDocData(localData)
+        //     }
+        // } else {
+        //     localStorage.setItem("doctors", JSON.stringify([{ id, ...data }]));
+        //     setDocData([{ id, ...data }])
+        // }
 
     }
 
@@ -45,10 +55,11 @@ function Doctors(props) {
 
 
     const handleDelete = (id) => {
-        let localData = JSON.parse(localStorage.getItem("doctors"));
-        const updateData = mData.filter((v) => v.id !== id);
-        localStorage.setItem('doctors', JSON.stringify(localData));
-        setDocData(updateData);
+        dispatch(deleteDoctor(id));
+        // let localData = JSON.parse(localStorage.getItem("doctors"));
+        // const updateData = mData.filter((v) => v.id !== id);
+        // localStorage.setItem('doctors', JSON.stringify(localData));
+        // setDocData(updateData);
     };
 
 
@@ -87,7 +98,7 @@ function Doctors(props) {
 
             <div style={{ height: 400, width: '100%' }}>
                 <DataGrid
-                    rows={mData}
+                    rows={doctor.doctor}
                     columns={columns}
                     initialState={{
                         pagination: {

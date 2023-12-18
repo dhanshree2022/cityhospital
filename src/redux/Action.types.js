@@ -16,6 +16,7 @@ export const UPDATE_DEPARTMENTS = "UPDATE_DEPARTMENTS";
 export const ADD_TO_CART = "ADD_TO_CART";
 export const INC_QTY = "INC_QTY";
 export const DEC_QTY = "DEC_QTY";
+export const DELETE_ITEM = "DELETE_ITEM";
 
 export const ADD_SHOPPING_CART = "ADD_SHOPPING_CART";
 export const INCREMENT_CART = "INCREMENT_CART";
@@ -26,3 +27,23 @@ export const GET_DOCTOR = "GET_DOCTOR";
 export const DELETE_DOCTOR = "DELETE_DOCTOR";
 export const ADD_DOCTOR = "ADD_DOCTOR";
 export const UPDATE_DOCTOR= "UPDATE_DOCTOR";
+
+
+export const GET_APPOINTMENT = "GET_APPOINTMENT";
+export const ADD_APPOINTMENT = "ADD_APPOINTMENT";
+export const UPDATE_APPOINTMENT = "UPDATE_APPOINTMENT";
+export const DELETE_APPOINTMENT = "DELETE_APPOINTMENT";
+
+
+export const SIGNUP_REQUEST = "SIGNUP_REQUEST";
+export const SIGNUP_RESPONSE = "SIGNUP_RESPONSE";
+export const AUTH_ERROR = "AUTH_ERROR";
+
+export const SIGNIN_REQUEST = "SIGNIN_REQUEST";
+export const SIGNIN_RESPONSE = "SIGNIN_RESPONSE";
+
+export const LOGOUT_REQUEST = "LOGOUT_REQUEST";
+export const LOGOUT = "LOGOUT";
+
+export const FORGOT_REQUEST = "FORGOT_REQUEST";
+export const FORGOT_RESPONSE = "FORGOT_RESPONSE";

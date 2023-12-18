@@ -1,4 +1,4 @@
-import { ADD_TO_CART, DEC_QTY, INC_QTY } from "../Action.types"
+import { ADD_TO_CART, DEC_QTY, DELETE_ITEM, INC_QTY } from "../Action.types"
 
 const initialState = {
     isLoading: false,
@@ -7,12 +7,12 @@ const initialState = {
 }
 
 export const cartReducer = (state = initialState, action) => {
-    console.log(action)
+    // console.log(action)
 
     switch (action.type) {
         case INC_QTY:
             let index = state.cart.findIndex((v) => v.id === action.payload);
-            console.log(index);
+            // console.log(index);
             state.cart[index].qty++
             return {
                 isLoading: false,
@@ -46,6 +46,12 @@ export const cartReducer = (state = initialState, action) => {
             return {
                 cart: state.cart
             }
+        case DELETE_ITEM:{
+            return {
+                ...state,
+                cart: state.cart.filter((v) => v.id !== action.payload)
+            }
+        }
         default:
             return state
     }

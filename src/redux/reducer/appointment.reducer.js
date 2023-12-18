@@ -1,33 +1,33 @@
-import { ADD_DEPARTMENTS, DELETE_DEPARTMENTS, GET_DEPARTMENTS, UPDATE_DEPARTMENTS } from "../Action.types";
+import { ADD_APPOINTMENT, DELETE_APPOINTMENT,  GET_APPOINTMENT,  UPDATE_APPOINTMENT } from "../Action.types";
 
 const initialState = {
     isLoading: false,
-    departments: [],
+    appointment: [],
     error: null
 }
-export const departmentsReducer = (state = initialState, action) => {
+export const appointmentReducer = (state = initialState, action) => {
     // console.log(action);
 
     switch (action.type) {
-        case GET_DEPARTMENTS:
+        case GET_APPOINTMENT:
             return {
                 ...state,
-                departments: action.payload
+                appointment: action.payload
             }
-        case DELETE_DEPARTMENTS:
+        case DELETE_APPOINTMENT:
             return {
                 ...state,
-                departments: state.departments.filter((v) => v.id !== action.payload)
+                appointment: state.appointment.filter((v) => v.id !== action.payload)
             }
-        case ADD_DEPARTMENTS:
+        case ADD_APPOINTMENT:
             return {
                 ...state,
-                departments: state.departments.concat(action.payload)
+                appointment: state.appointment.concat(action.payload)
             }
-        case UPDATE_DEPARTMENTS:
+        case UPDATE_APPOINTMENT:
             return {
                 ...state,
-                departments: state.departments.map((v) => {
+                appointment: state.appointment.map((v) => {
                     if (v.id === action.payload.id) {
                         return action.payload
                     } else {

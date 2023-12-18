@@ -1,5 +1,4 @@
 import React from 'react';
-import { Heading2 } from '../../components/UI/Heading/Heading';
 import { Link } from 'react-router-dom';
 
 function Department(props) {
@@ -8,7 +7,7 @@ function Department(props) {
             <section id="departments" className="departments">
                 <div className="container">
                     <div className="section-title">
-                        <Heading2>Departments</Heading2>
+                        <h2>Departments</h2>
                         <Link to={'/department/1'}>Department 1</Link>
                         <Link to={'/department/2'}>Department 2</Link>
                         <Link to={'/department/3'}>Department 3</Link>

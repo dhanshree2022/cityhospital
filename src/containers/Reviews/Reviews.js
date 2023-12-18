@@ -34,7 +34,7 @@ function Reviews(props) {
         <div className="container">
           <div className="section-title"><h2>Reviews</h2></div>
 
-          <Swiper spaceBetween={10} navigation={true} modules={[Navigation]} className="mySwiper"
+          <Swiper spaceBetween={10} navigation={true} modules={[Navigation]}
             breakpoints={{
               450: { slidesPerView: 1, },
               630: { slidesPerView: 2, },
@@ -46,6 +46,7 @@ function Reviews(props) {
               rData.map((v, i) => {
                 return (
                   <SwiperSlide>
+                    
                     <Link to={'/review-details/' + v.id}>
                       <Card
                         title={v.name.toString(15)}

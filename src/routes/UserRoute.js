@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Route, Routes } from 'react-router';
 import Home from '../containers/Home/Home';
 import Department from '../containers/Department/Department';
@@ -21,14 +21,18 @@ import Counter from '../containers/Counter/Counter';
 import Cart from '../containers/Cart/Cart';
 import ShoppingCart from '../containers/ShoppingCart/ShoppingCart';
 import Wishlist from '../containers/Wishlist/Wishlist';
+import ThemeContext from '../context/theme.context';
+import Example from '../containers/Example/Example';
 
 
 function UserRoute(props) {
     const [countCart,setCountCart] = useState(0);
     const [fav, setFav] = useState([]);
+    const theme = useContext(ThemeContext);
 
     return (
         <>
+        {/* <div className={`${theme.theme}`}> */}
             <Header countCart={countCart} fav={fav}/>
                 <Routes>
                     <Route exact path='/' element={<Home />} />
@@ -51,13 +55,16 @@ function UserRoute(props) {
                     <Route exact path='/cart' element={<Cart/>}/>
                     <Route exact path='/shoppingcart' element={<ShoppingCart/>}/>
                     <Route exact path='/wishlist' element={<Wishlist/>}/>
+                    <Route exact path='/example' element={<Example/>}/>
+
 
 
                 </Routes>
             <Footer />
+        {/* </div> */}
         </>
-
     );
 }
 
 export default UserRoute;
+

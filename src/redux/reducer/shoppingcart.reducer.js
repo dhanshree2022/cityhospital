@@ -7,11 +7,11 @@ const initialState = {
 }
 
 export const shoppingReducer = (state=initialState,action) =>{
-    console.log(action);
+    // console.log(action);
     switch(action.type){
         case ADD_SHOPPING_CART:
             let check = state.shoppingcart.some((v) => v.id === action.payload.id)
-            console.log(check);
+            // console.log(check);
 
             if (check) {
                 let index = state.shoppingcart.findIndex((v) => v.id === action.payload.id)
@@ -27,7 +27,7 @@ export const shoppingReducer = (state=initialState,action) =>{
         case INCREMENT_CART:
 
         let index = state.shoppingcart.findIndex((v) => v.id === action.payload);
-            console.log(index);
+            // console.log(index);
             state.shoppingcart[index].qty++
             return {
                 isLoading: false,
@@ -41,7 +41,7 @@ export const shoppingReducer = (state=initialState,action) =>{
                 state.shoppingcart[index1].qty--
 
             // }
-            console.log(index1);
+            // console.log(index1);
 
             return{
                 isLoading: false,

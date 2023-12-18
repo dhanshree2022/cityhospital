@@ -5,14 +5,13 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import MedicensForm from './MedicensForm';
 import { GET_MEDICINES } from '../../../redux/Action.types';
 import { useDispatch, useSelector } from 'react-redux';
-import { addMedicines, deleteMedicines, getMedicines, updateMedicines } from '../../../redux/action/medicines.action';
+import { addMedicines, deleteMedicines, getMedicines, updateMedicines } from '../../../redux/slice/medicines.slice';
 
 function Medicens() {
     const [update, setUpdate] = useState(false);
     const dispatch = useDispatch();
     const medicines = useSelector(state=>state.medicines);
     
-
 
     useEffect(() => {
         dispatch(getMedicines());   

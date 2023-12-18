@@ -5,17 +5,16 @@ import { styled } from '@mui/material/styles';
 import IconButton from '@mui/material/IconButton';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
-import { useSelector } from 'react-redux';
-
+import { useDispatch, useSelector } from 'react-redux';
+import { useContext } from 'react';
+import ThemeContext from '../../context/theme.context';
+import ToggleOffIcon from '@mui/icons-material/ToggleOff';
+import { logoutRequest } from '../../redux/action/auth.action';
 function Header({ countCart, fav }) {
-    // const cart = useSelector(state => state.cart);
-    // const cartData = cart.cart.reduce((acc,v) => acc + v.qty, 0);
-    // console.log(cartData);
-
-    const shoppingcart = useSelector(state => state.shoppingcart);
-    const shopping = shoppingcart.shoppingcart.reduce((acc, v) => acc + v.qty, 0);
-    console.log(shopping);
-
+    let auth = useSelector(state => state.auth);
+    const theme = useContext(ThemeContext);
+    const cart = useSelector(state => state.cart);
+    const cartData = cart.cart.reduce((acc, v) => acc + v.qty, 0);
 
     const StyledBadge = styled(Badge)(({ theme }) => ({
         '& .MuiBadge-badge': {
@@ -25,22 +24,36 @@ function Header({ countCart, fav }) {
             padding: '0 4px',
         },
     }));
+
+    const dispatch = useDispatch();
+    const handleLogout = () =>{
+        dispatch(logoutRequest())
+    }
+
     return (
-        <div className="main-header">
-            <div id="topbar" className="d-flex align-items-center fixed-top">
+        <div className={`main-header ${theme.theme}`}>
+            <div id="topbar" className={`d-flex align-items-center fixed-top ${theme.theme}`}>
                 <div className="container d-flex justify-content-between">
                     <div className="contact-info d-flex align-items-center">
                         <i className="bi bi-envelope" /> <a href="mailto:contact@example.com">cityhospital@example.com</a>
                         <i className="bi bi-phone" /> +91 9988776655
                     </div>
-                    <div className="d-none d-lg-flex social-links align-items-center">
-                        {/* <Link to={'/cart'}> */}
-                        <Link to={'/shoppingcart'}>
-                            <IconButton aria-label="cart" >
-                                {/* <StyledBadge badgeContent={cartData} color="secondary" > */}
-                                <StyledBadge badgeContent={shopping} color="secondary" >
+                    <ToggleOffIcon onClick={() => theme.toogleTheme(theme.theme)}>ChangeTheme</ToggleOffIcon>
+                    <select>
+                        <option>--Select--</option>
+                        <option>English</option>
+                        <option>Hindi</option>
+                        <option>Gujarati</option>
 
-                                    <ShoppingCartIcon />
+                    </select>
+                    <div className="d-none d-lg-flex social-links align-items-center">
+                        <Link to={'/cart'}>
+                            {/* <Link to={'/shoppingcart'}> */}
+                            <IconButton aria-label="cart" >
+                                <StyledBadge badgeContent={cartData} color="secondary" >
+                                    {/* <StyledBadge badgeContent={shopping} color="secondary" > */}
+
+                                    <ShoppingCartIcon sx={{ color: theme.theme === 'light' ? 'gray' : 'white' }} />
                                 </StyledBadge>
                             </IconButton>
                         </Link>
@@ -78,6 +91,14 @@ function Header({ countCart, fav }) {
                                 Home
                             </NavLink>
                             </li>
+                            <li>
+                                <NavLink className="nav-link scrollto" to="/example" style={({ isActive }) => ({
+                                    color: isActive ? 'red' : 'black'
+                                })}>
+                                    Example
+                                </NavLink>
+                            </li>
+
                             <li>
                                 <NavLink className="nav-link scrollto" to="/department" style={({ isActive }) => ({
                                     color: isActive ? 'red' : 'black'
@@ -136,9 +157,17 @@ function Header({ countCart, fav }) {
                     </nav>
                     <NavLink to={"/appointment"} className="appointment-btn scrollto" ><span className="d-none d-md-inline">Make an</span>
                         Appointment</NavLink>
-                    <NavLink to={"/auth"} className="appointment-btn scrollto">
-                        <span className="d-none d-md-inline">Login/ Signup</span>
-                    </NavLink>
+
+                    {
+                        auth.user ?
+                            <NavLink to={"/"} className="appointment-btn scrollto" onClick={handleLogout}> 
+                                <span className="d-none d-md-inline">Logout</span>
+                            </NavLink> :
+                            <NavLink to={"/auth"} className="appointment-btn scrollto">
+                                <span className="d-none d-md-inline">Login/ Signup</span>
+                            </NavLink>
+                    }
+
                 </div>
             </header>
 

@@ -1768,14 +1768,6 @@ section {
   color: #494646;
 } */
 
-
-
-
-
-
-
-
-
 .shopping-cart{
   width: 750px;
   height: auto;
@@ -1938,4 +1930,12 @@ input:focus{
   .buttons{
     margin-right: 20px;
   }
+}
+.dark{
+  background-color: black !important;
+  color: white !important;
+}
+.dark{
+  background-color: white !important;
+  color: black !important;
 }

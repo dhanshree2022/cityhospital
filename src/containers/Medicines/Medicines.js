@@ -2,10 +2,11 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Card from '../../components/UI/Card/Card';
 import { useDispatch, useSelector } from 'react-redux';
-import { getMedicines, loadingMedicines } from '../../redux/action/medicines.action';
+import {   loadingMedicines } from '../../redux/action/medicines.action';
 import CircularProgress from '@mui/material/CircularProgress';
-import { addToCart } from '../../redux/action/cart.action';
 import { addShoppingCart } from '../../redux/action/shopping.action';
+import { addToCart } from '../../redux/slice/cart.slice';
+import { getMedicines } from '../../redux/slice/medicines.slice';
 
 function Medicines({ incrementCount, fav,setFav }) {
 
@@ -19,19 +20,19 @@ function Medicines({ incrementCount, fav,setFav }) {
     const dispatch = useDispatch();
     const medicines = useSelector(state => state.medicines,);
     console.log(medicines.medicines);
-    // const cart = useSelector(state => state.cart);
-    // console.log(cart);
+    const cart = useSelector(state => state.cart);
+    console.log(cart);
 
-    const shoppingcart = useSelector(state => state.shoppingcart);
-    console.log("shoppingcart",shoppingcart);
+    // const shoppingcart = useSelector(state => state.shoppingcart);
+    // console.log("shoppingcart",shoppingcart);
     useEffect(() => {
         dispatch(getMedicines());
     }, [])
 
     const handleAddToCart = (id) => {
-        // console.log(id);
-        // dispatch(addToCart(id))
-        dispatch(addShoppingCart(id))
+        console.log(id);
+        dispatch(addToCart({id:id,qty:1} ))
+        // dispatch(addShoppingCart(id))
     }
     const addToFavorites = (id) => {
         if (!favorites.includes(id)) {

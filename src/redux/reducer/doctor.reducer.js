@@ -6,7 +6,7 @@ const initialState = {
     error: null
 }
 export const doctorReducer = (state = initialState, action) => {
-    console.log(action);
+    // console.log(action);
 
     switch (action.type) {
         case GET_DOCTOR:
